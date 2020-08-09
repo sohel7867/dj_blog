@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Py DJ Blog Home</title>
+    <!-- All CSS References-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css'%}">
+  </head>
+  <body>
+    <!--Header Start-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Py DJ Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link"  href="{% url 'blog-home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'post-create' %}">Create Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li>
+              <label class="form-control">Welcome - {{ user.username }}</label>
+            </li>
+            {% else %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            {% endif %}
+        </div>
+      </nav>
+    <!--Header Ends-->
+    <br/>
+    <br/>
+    <!--Main Area Starts -->
+    <div class="container">
+        <div class="row">
+            <!--Main Area Content Starts -->
+            <div class="col-sm-8">
+              {% if messages %}
+  
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}">
+                      {{message}}
+                    </div>
+                {% endfor %}
+
+              {% endif %}
+                {% block content%}
+
+                {% endblock %}
+            </div>
+            <!--Main Area Content End -->
+
+            <!--Right Nav Bar Starts -->
+            <div class="col-sm-4">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">
+                      Latest Posts
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                      Python Posts
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">
+                      Django Posts
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">
+                      HTML5 Posts
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">
+                      CSS Posts
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">
+                      Bootstrap Posts
+                    </a>
+                  </div>
+                  <br/>
+                  <br/>
+            </div>
+             <!--Right Nav Bar Ends -->
+        </div>
+    </div>         
+    <!--Main Area Ends -->
+     <!--Footer Start-->
+     <div class="footer">
+        <p>Py Dj Blog CopyRight@2020</p>
+    </div>
+    <!--Footer Ends-->
+
+  </body>
+</html>

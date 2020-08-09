@@ -1,0 +1,64 @@
+{% extends 'base.html'%} {% block content%}
+<div>
+  <h3><marquee>Welcome to Py Dj Blog!!!!</marquee></h3>
+  <br />
+  {% for p in posts %}
+  <div class="card border-primary mb-3">
+    <div class="card-header">
+      <img
+        class="rounded-circle article-img"
+        style="width: 45px; height: 45px;"
+        src="{{ p.author.profile.image.url }}"
+      />
+      <b
+        ><a class="article-title" href="{% url 'post-detail' p.id %}"
+          >{{ p.title }}</a
+        ></b
+      >
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <h6 class="card-title">
+            By - {{p.author}} On {{p.date_posted |date:"F d, Y"}}
+          </h6>
+        </div>
+      </div>
+
+      <p class="card-text">{{p.content}}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a class="btn btn-outline-info mb-4" href="?page=1">&laquo; First</a>
+    <a
+      class="btn btn-outline-info mb-4"
+      href="?page={{ page_obj.previous_page_number }}"
+      >Previous</a
+    >
+    {% endif %}
+
+    <span class="current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+    <a
+      class="btn btn-outline-info mb-4"
+      href="?page={{ page_obj.next_page_number }}"
+      >Next</a
+    >
+    <a
+      class="btn btn-outline-info mb-4"
+      href="?page={{ page_obj.paginator.num_pages }}"
+      >Last &raquo;</a
+    >
+    {% endif %}
+  </span>
+</div>
+
+{% endblock content %}
