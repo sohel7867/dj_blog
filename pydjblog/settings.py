@@ -140,5 +140,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'sohelmira28@gmail.com'
 EMAIL_HOST_PASSWORD = 'Shivani.mane@gmail.com'
-
-django_heroku.settings(locals())  
+django_heroku.settings(locals())
+  
